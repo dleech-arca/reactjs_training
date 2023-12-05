@@ -89,7 +89,7 @@ function PostsList() {
                     {/*<Post author="Maximilian" body="React.js is awesome!"/>*/}
                     {/*<Post author={enteredAuthor} body={enteredBody}/>*/}
                     {/*<Post author="Manuel" body="Check out the full course!"/>*/}
-                    {posts.map((post: { body: string; author: string; }) => (<Post key={post.body} author={post.author} body={post.body} />))}
+                    {posts.map((post: {id:string; body: string; author: string; }) => (<Post key={post.id} id={post.id} author={post.author} body={post.body} />))}
                 </ul>
             )}
             {/*{!isFetching && posts.length === 0 && (*/}
