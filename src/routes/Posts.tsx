@@ -1,13 +1,16 @@
-import {useState} from 'react';
-import React from 'react';
+// import {useState} from 'react';
 // import logo from './logo.svg';
-import '../App.css';
 // import Post from './components/Post';
+// import MainHeader from '../components/MainHeader';
+// import Modal from '../components/Modal';
+import React from 'react';
+import './Posts.css';
 import PostsList from "../components/PostsList";
-import MainHeader from '../components/MainHeader';
-import Modal from '../components/Modal';
+import { Outlet } from 'react-router-dom';
 
-function App() {
+
+
+function Posts() {
   // return (
   //   <div className="App">
   //     <header className="App-header">
@@ -30,26 +33,33 @@ function App() {
   // return <h1>Hello World!</h1>;
   // return <Post />;
 
-    const [modalIsVisable, setModalIsVisable] = useState(false);
+    // const [modalIsVisable, setModalIsVisable] = useState(false);
 
-    function hideModalHandler() {
-        setModalIsVisable(false);
-    }
-
-    function showModalHandler() {
-        setModalIsVisable(true);
-    }
+    // function hideModalHandler() {
+    //     setModalIsVisable(false);
+    // }
+    //
+    // function showModalHandler() {
+    //     setModalIsVisable(true);
+    // }
 
     return (
           <>
-              <MainHeader onCreatePost={showModalHandler}/>
+              {/*<MainHeader onCreatePost={showModalHandler}/>*/}
+              < Outlet />
               <main>
                   {/*<Post author="Maximilian" body="React.js is awesome!"/>*/}
                   {/*<Post author="Manuel" body="Check out the full course!"/>*/}
-                  <PostsList isPosting={modalIsVisable} onStopPosting={setModalIsVisable}/>
+                  {/*<PostsList isPosting={modalIsVisable} onStopPosting={setModalIsVisable}/>*/}
+                  <PostsList />
               </main>
           </>
   );
 }
 
-export default App;
+export default Posts;
+export async function loader() {
+    const response = await fetch('http://localhost:8080/posts');
+    const resData = await response.json();
+    return resData.posts;
+}

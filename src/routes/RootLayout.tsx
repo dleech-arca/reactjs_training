@@ -3,9 +3,10 @@ import { Outlet } from 'react-router-dom';
 
 function RootLayout() {
     return <>
-        <MainHeader onCreatePost={function(): void {
-            throw new Error('Function not implemented.');
-        } } />
+        {/*<MainHeader onCreatePost={function(): void {*/}
+        {/*    throw new Error('Function not implemented.');*/}
+        {/*} } />*/}
+        <MainHeader />
         <Outlet />
     </>
 }

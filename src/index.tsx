@@ -2,26 +2,41 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.css';
-import App from './App';
+import Posts, {loader as postsLoader} from './routes/Posts';
 import reportWebVitals from './reportWebVitals';
-import NewPost from './components/NewPost';
+import NewPost, { action as newPostAction} from './routes/NewPost';
 import RootLayout from './routes/RootLayout'
 
 
-interface Post {
-    body: string;
-    author: string;
-}
+
+// interface Post {
+//     body: string;
+//     author: string;
+// }
 
 const router= createBrowserRouter([
     { path: '/', element: <RootLayout />, children: [
-            { path: '/', element: <App />}, // our domain
-            { path: '/create-post', element: <NewPost onCancel={function(): void {
-                    throw new Error('Function not implemented.');
-                } } onAddPost={function(post: Post): void {
-                    throw new Error('Function not implemented.');
-                } } />}
-        ]},
+            {
+                path: '/',
+                element: <Posts />,
+                // loader: () => {},
+                loader: postsLoader,
+                children: [
+                    // { path: '/create-post', element: <NewPost onCancel={function(): void {
+                    //         throw new Error('Function not implemented.');
+                    {
+                        path: '/create-post',
+                        // element: <NewPost onAddPost={function(post: Post): void {
+                        //     throw new Error('Function not implemented.');
+                        // } } />,
+                        element: <NewPost />,
+                        // action: () => {},
+                        action: newPostAction,
+                    }],
+            }, // our domain
+
+        ],
+    },
 ]);
 
 const root = ReactDOM.createRoot(
